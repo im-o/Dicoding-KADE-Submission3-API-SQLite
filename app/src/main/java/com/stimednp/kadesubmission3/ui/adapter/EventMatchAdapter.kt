@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import com.stimednp.kadesubmission3.util.CustomesUI
 import com.stimednp.kadesubmission3.R
-import com.stimednp.kadesubmission3.util.invisible
 import com.stimednp.kadesubmission3.model.EventsLeagues
 import com.stimednp.kadesubmission3.model.TeamsBadge
 import com.stimednp.kadesubmission3.ui.xml.activity.DetailsEventActivity
+import com.stimednp.kadesubmission3.util.CustomesUI
+import com.stimednp.kadesubmission3.util.invisible
 import kotlinx.android.synthetic.main.item_event_match.view.*
 import org.jetbrains.anko.startActivity
 

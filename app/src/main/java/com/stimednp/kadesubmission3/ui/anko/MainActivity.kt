@@ -3,25 +3,26 @@ package com.stimednp.kadesubmission3.ui.anko
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.stimednp.kadesubmission3.util.CustomesUI.showProgress
-import com.stimednp.kadesubmission3.util.CustomesUI.showProgressDialog
 import com.stimednp.kadesubmission3.R
 import com.stimednp.kadesubmission3.api.ApiClient
-import com.stimednp.kadesubmission3.util.invisible
 import com.stimednp.kadesubmission3.model.Leagues
 import com.stimednp.kadesubmission3.ui.anko.MainUI.Companion.rv_main
 import com.stimednp.kadesubmission3.ui.anko.MainUI.Companion.swipeRefresh
+import com.stimednp.kadesubmission3.ui.anko.MainUI.Companion.tbar_main
 import com.stimednp.kadesubmission3.ui.anko.MainUI.Companion.tv_nodata
+import com.stimednp.kadesubmission3.ui.xml.activity.FavoritesActivity
+import com.stimednp.kadesubmission3.util.CustomesUI.showProgress
+import com.stimednp.kadesubmission3.util.CustomesUI.showProgressDialog
+import com.stimednp.kadesubmission3.util.invisible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
     var leagueList = ArrayList<Leagues>()
@@ -36,11 +37,31 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainUI(leagueList).setContentView(this)
+        setToolbar()
         init()
         getIdListLeague()
         swipeRefresh.onRefresh {
             reloadData()
         }
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(tbar_main)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.my_favorites -> {
+                startActivity<FavoritesActivity>()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun init() {
@@ -121,10 +142,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         sizeListId = listIdLeagues.size
-//        for (i in leagues.indices) {
-//            val id = leagues[i].idLeague!!.toInt()
-//            listIdLeagues.add(id)
-//        }
         for (i in listIdLeagues.indices) {
             val id = listIdLeagues[i]
             getDataById(id)

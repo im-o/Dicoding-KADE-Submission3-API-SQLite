@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import com.stimednp.kadesubmission3.util.CustomesUI
 import com.stimednp.kadesubmission3.R
-import com.stimednp.kadesubmission3.util.invisible
 import com.stimednp.kadesubmission3.model.EventsLeagues
 import com.stimednp.kadesubmission3.model.TeamsBadge
+import com.stimednp.kadesubmission3.util.CustomesUI
+import com.stimednp.kadesubmission3.util.invisible
 import com.stimednp.kadesubmission3.util.visible
 import kotlinx.android.synthetic.main.activity_details_event.*
 import kotlinx.android.synthetic.main.item_header_statis.*
@@ -34,12 +34,12 @@ class DetailsEventActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        setSupportActionBar(toolbar_statis)
+        setSupportActionBar(tbar_statis)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_statis.setTitle(R.string.app_detail_match)
-        toolbar_statis.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        toolbar_statis.setNavigationOnClickListener { finish() }
+        tbar_statis.setTitle(R.string.app_detail_match)
+        tbar_statis.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
+        tbar_statis.setNavigationOnClickListener { finish() }
     }
 
     private fun setData(ev: EventsLeagues, badgeH: TeamsBadge, badgeA: TeamsBadge) {

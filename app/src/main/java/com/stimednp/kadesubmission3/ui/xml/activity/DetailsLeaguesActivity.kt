@@ -12,12 +12,14 @@ import com.squareup.picasso.Picasso
 import com.stimednp.kadesubmission3.R
 import com.stimednp.kadesubmission3.model.Leagues
 import com.stimednp.kadesubmission3.ui.adapter.ViewPagerAdapter
-import kotlinx.android.synthetic.main.activity_details.*
+import com.stimednp.kadesubmission3.ui.xml.fragment.LastMatchFragment
+import com.stimednp.kadesubmission3.ui.xml.fragment.NextMatchFragment
+import kotlinx.android.synthetic.main.activity_details_leagues.*
 import kotlinx.android.synthetic.main.item_header.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-class DetailsActivity : AppCompatActivity(), View.OnClickListener {
+class DetailsLeaguesActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
 
         val EXTRA_DATA: String = "extra_data"
@@ -26,7 +28,7 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        setContentView(R.layout.activity_details_leagues)
         items = intent.getParcelableExtra(EXTRA_DATA)
         initClick()
         setToolbar()
@@ -49,20 +51,20 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setToolbar() {
-        val toolbar = htab_toolbar
-        setSupportActionBar(toolbar)
+        setSupportActionBar(htab_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar.setTitle(R.string.app_detail_leagues)
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        toolbar.setNavigationOnClickListener { finish() }
+        htab_toolbar.setTitle(R.string.app_detail_leagues)
+        htab_toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
+        htab_toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun setupViewPager() {
-        htab_viewpager.adapter = ViewPagerAdapter(supportFragmentManager, this)
+        val pages = listOf(LastMatchFragment(), NextMatchFragment())
+        val strTab = listOf(R.string.str_last_match, R.string.str_next_match)
+        val strIc = listOf(R.drawable.ic_event_complete_black, R.drawable.ic_event_next_black)
+        htab_viewpager.adapter = ViewPagerAdapter(this, strTab, pages, supportFragmentManager)
         htab_tablayout.setupWithViewPager(htab_viewpager)
-        htab_tablayout.getTabAt(0)?.setIcon(R.drawable.ic_event_complete_black)
-        htab_tablayout.getTabAt(1)?.setIcon(R.drawable.ic_event_next_black)
+        for (i in pages.indices) htab_tablayout.getTabAt(i)?.setIcon(strIc[i])
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -78,7 +80,7 @@ class DetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(id: View?) {
-        when(id){
+        when (id) {
             tv_web -> goUri(items?.strWebsite)
             tv_fb -> goUri(items?.strFacebook)
             tv_twit -> goUri(items?.strTwitter)

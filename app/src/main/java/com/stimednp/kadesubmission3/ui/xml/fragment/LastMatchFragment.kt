@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.stimednp.kadesubmission3.R
 import com.stimednp.kadesubmission3.api.ApiClient
-import com.stimednp.kadesubmission3.util.gone
 import com.stimednp.kadesubmission3.model.EventsLeagues
 import com.stimednp.kadesubmission3.model.TeamsBadge
 import com.stimednp.kadesubmission3.ui.adapter.EventMatchAdapter
-import com.stimednp.kadesubmission3.ui.xml.activity.DetailsActivity
+import com.stimednp.kadesubmission3.ui.xml.activity.DetailsLeaguesActivity
+import com.stimednp.kadesubmission3.util.gone
 import com.stimednp.kadesubmission3.util.visible
 import kotlinx.android.synthetic.main.fragment_last_match.*
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +38,7 @@ class LastMatchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dataItems = DetailsActivity.items
+        val dataItems = DetailsLeaguesActivity.items
         idLeague = dataItems?.idLeague!!
         setIdEvent(idLeague!!)
 

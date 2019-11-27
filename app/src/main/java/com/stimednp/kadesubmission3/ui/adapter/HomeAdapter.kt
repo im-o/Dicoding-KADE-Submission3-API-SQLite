@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.stimednp.kadesubmission3.R
-import com.stimednp.kadesubmission3.util.invisible
 import com.stimednp.kadesubmission3.model.Leagues
 import com.stimednp.kadesubmission3.ui.anko.ItemLeaguesUI
+import com.stimednp.kadesubmission3.util.invisible
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 

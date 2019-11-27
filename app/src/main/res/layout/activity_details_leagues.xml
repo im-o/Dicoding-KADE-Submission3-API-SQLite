@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.xml.activity.DetailsActivity">
+    tools:context=".ui.xml.activity.DetailsLeaguesActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -53,9 +53,10 @@
                 android:layout_marginBottom="48dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                tools:title="@string/app_title" />
+                app:title="@string/app_detail_leagues" />
 
             <com.google.android.material.tabs.TabLayout
+                style="@style/CustomeTabLayout"
                 android:id="@+id/htab_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
                 app:tabInlineLabel="true"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/colorTextIcon"
-                app:tabTextColor="@color/colorTextGrey" />
+                app:tabTextColor="@color/colorTextLow" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

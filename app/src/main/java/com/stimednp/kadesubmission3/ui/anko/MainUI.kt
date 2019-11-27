@@ -3,7 +3,7 @@ package com.stimednp.kadesubmission3.ui.anko
 import android.graphics.Typeface
 import android.view.View
 import android.widget.TextView
-import android.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +13,9 @@ import com.stimednp.kadesubmission3.R
 import com.stimednp.kadesubmission3.R.color.*
 import com.stimednp.kadesubmission3.model.Leagues
 import com.stimednp.kadesubmission3.ui.adapter.HomeAdapter
-import com.stimednp.kadesubmission3.ui.xml.activity.DetailsActivity
+import com.stimednp.kadesubmission3.ui.xml.activity.DetailsLeaguesActivity
 import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.themedAppBarLayout
 import org.jetbrains.anko.recyclerview.v7.recyclerView
@@ -29,7 +30,7 @@ class MainUI(val items: ArrayList<Leagues>) : AnkoComponent<MainActivity> {
         lateinit var rv_main: RecyclerView
         lateinit var tv_nodata: TextView
         lateinit var swipeRefresh: SwipeRefreshLayout
-        lateinit var toolbar_main: Toolbar
+        lateinit var tbar_main: Toolbar
     }
 
     override fun createView(ui: AnkoContext<MainActivity>): View = with(ui) {
@@ -38,9 +39,9 @@ class MainUI(val items: ArrayList<Leagues>) : AnkoComponent<MainActivity> {
             fitsSystemWindows = true
 
             themedAppBarLayout(R.style.AppTheme_AppBarOverlay) {
-                toolbar_main = toolbar {
+                tbar_main = toolbar {
                     title = resources.getString(R.string.app_title)
-                    backgroundColor = getColor(context, colorPrimaryToolbar)
+                    backgroundColor = getColor(context, colorPrimary)
                 }.lparams(matchParent, wrapContent) {
                     scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
                 }
@@ -59,7 +60,7 @@ class MainUI(val items: ArrayList<Leagues>) : AnkoComponent<MainActivity> {
                         layoutManager = LinearLayoutManager(context)
                         adapter = HomeAdapter(items) {
                             //                            startActivity<DetailsActivity>()
-                            startActivity<DetailsActivity>(DetailsActivity.EXTRA_DATA to it)
+                            startActivity<DetailsLeaguesActivity>(DetailsLeaguesActivity.EXTRA_DATA to it)
                         }
                     }
                     tv_nodata = textView {
