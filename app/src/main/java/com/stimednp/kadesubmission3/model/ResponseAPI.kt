@@ -56,9 +56,7 @@ data class EventsLeagues(
     var strHomeTeam: String?,
     var strAwayTeam: String?,
     var intHomeScore: Int?,
-    var intRound: Int?,
     var intAwayScore: Int?,
-    var intSpectators: Int?,
     var strHomeGoalDetails: String?,
 
     var strHomeRedCards: String?,
@@ -83,10 +81,7 @@ data class EventsLeagues(
     var intHomeShots: Int?,
     var intAwayShots: Int?,
     var dateEvent: String?,
-    var strDate: String?,
-    var strTime: String?,
-    var strThumb: String?,
-    var strVideo: String?
+    var strTime: String?
 ) : Parcelable
 
 @Parcelize
