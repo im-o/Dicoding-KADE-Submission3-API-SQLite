@@ -2,7 +2,6 @@ package com.stimednp.kadesubmission3.ui.xml.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.stimednp.kadesubmission3.R
 import com.stimednp.kadesubmission3.ui.adapter.ViewPagerAdapter
 import com.stimednp.kadesubmission3.ui.xml.fragment.FavLastmFragment

@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     val gson = GsonBuilder().setLenient().create()
-        private val interceptor = Interceptor {chain ->
+    private val interceptor = Interceptor { chain ->
         val newUrl = chain.request().url()
             .newBuilder()
             .build()
