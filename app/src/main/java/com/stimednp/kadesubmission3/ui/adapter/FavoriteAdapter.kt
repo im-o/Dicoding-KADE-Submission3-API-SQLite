@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.stimednp.kadesubmission3.R
-import com.stimednp.kadesubmission3.model.EventsLeagues
-import com.stimednp.kadesubmission3.model.TeamsBadge
+import com.stimednp.kadesubmission3.model.Favorites
 import com.stimednp.kadesubmission3.ui.xml.activity.DetailsEventActivity
 import com.stimednp.kadesubmission3.util.CustomesUI
 import com.stimednp.kadesubmission3.util.invisible
@@ -17,36 +16,41 @@ import kotlinx.android.synthetic.main.item_event_match.view.*
 import org.jetbrains.anko.startActivity
 
 /**
- * Created by rivaldy on 11/16/2019.
+ * Created by rivaldy on 11/28/2019.
  */
 
-class EventMatchAdapter(
-    private val context: Context, private val items: ArrayList<EventsLeagues>,
-    private val badgesH: ArrayList<TeamsBadge>, private val badgesA: ArrayList<TeamsBadge>
-) :
-    RecyclerView.Adapter<EventMatchAdapter.EventMatchViewHolder>() {
+class FavoriteAdapter(
+    private val context: Context,
+    private val items: ArrayList<Favorites>
+) : RecyclerView.Adapter<FavoriteAdapter.MatchViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventMatchViewHolder {
-        return EventMatchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_event_match, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
+        return MatchViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_event_match,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: EventMatchViewHolder, position: Int) {
-        holder.bindItem(items[position], badgesH[position], badgesA[position])
+    override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
+        holder.bindItem(items[position])
         holder.view.setOnClickListener() {
             context.startActivity<DetailsEventActivity>(
                 DetailsEventActivity.EXTRA_DATA_EVENT to items[position].idEvent,
-                DetailsEventActivity.EXTRA_BADGEH to badgesH[position].strTeamBadge,
-                DetailsEventActivity.EXTRA_BADGEA to badgesA[position].strTeamBadge
+                DetailsEventActivity.EXTRA_BADGEH to items[position].strBadgeH,
+                DetailsEventActivity.EXTRA_BADGEA to items[position].strBadgeA
             )
         }
     }
 
-    class EventMatchViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        fun bindItem(itemsE: EventsLeagues?, badgesH: TeamsBadge?, badgesA: TeamsBadge?) {
-            val urlimgH = "${badgesH?.strTeamBadge}/preview"
-            val urlimgA = "${badgesA?.strTeamBadge}/preview"
+    class MatchViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        fun bindItem(itemsE: Favorites?) {
+            val urlimgH = "${itemsE?.strBadgeH}/preview"
+            val urlimgA = "${itemsE?.strBadgeA}/preview"
             val dateChange = CustomesUI.changeDateFormat(itemsE?.dateEvent!!, itemsE.strTime!!)
 
             view.tv_league_sport.text = itemsE.strSport
@@ -76,9 +80,6 @@ class EventMatchAdapter(
                     view.prog_tim_away.invisible()
                 }
             })
-
-
         }
-
     }
 }
