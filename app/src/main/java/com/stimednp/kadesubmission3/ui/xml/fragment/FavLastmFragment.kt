@@ -38,7 +38,7 @@ class FavLastmFragment : Fragment() {
         initial()
         swipe_lastm.isRefreshing = true
         swipe_lastm.setColorSchemeResources(R.color.colorAccent, R.color.colorTwitter, R.color.colorYoutube, R.color.colorFacebook)
-        swipe_lastm.onRefresh {showFavorite()}
+        swipe_lastm.onRefresh { showFavorite() }
     }
 
     private fun initial() {
@@ -60,10 +60,11 @@ class FavLastmFragment : Fragment() {
     }
 
     private fun disableLoad() {
-        if (swipe_lastm.isRefreshing){
+        if (swipe_lastm.isRefreshing) {
             swipe_lastm.isRefreshing = false
         }
     }
+
     private fun enableNoData() {
         tv_fav_emptyl.visible()
     }

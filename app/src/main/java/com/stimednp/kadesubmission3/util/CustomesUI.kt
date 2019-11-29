@@ -18,7 +18,8 @@ object CustomesUI {
     lateinit var showProgress: Dialog
 
     fun showProgressDialog(context: Context) {
-        showProgress = Dialog(context,
+        showProgress = Dialog(
+            context,
             R.style.AppTheme_NoActionBar
         )
         showProgress.window?.setBackgroundDrawable(ColorDrawable(Color.argb(100, 0, 0, 0)))

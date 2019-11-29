@@ -43,7 +43,7 @@ class HomeAdapter(val items: ArrayList<Leagues>, val listener: (Leagues) -> Unit
 
         fun bindItem(leagues: Leagues, position: Int, listener: (Leagues) -> Unit) {
             val strUrl = "${leagues.strBadge}/preview"
-            val strName = "${position+1}. ${leagues.strLeague}"
+            val strName = "${position + 1}. ${leagues.strLeague}"
             ligaName.text = strName
             ligaDesc.text = leagues.strDescriptionEN
             Picasso.get().load(strUrl).fit().into(ligaImg, object : Callback {

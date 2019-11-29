@@ -88,7 +88,7 @@ class DetailsLeaguesActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun goUri(url: String?) {
+    private fun goUri(url: String?) {
         if (url == "") {
             toast(getString(R.string.str_nourl))
         } else {

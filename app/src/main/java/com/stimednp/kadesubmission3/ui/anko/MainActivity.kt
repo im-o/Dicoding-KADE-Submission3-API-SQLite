@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.my_favorites -> {
                 startActivity<FavoritesActivity>()
             }
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun reloadData() {
+    private fun reloadData() {
         if (leagueAddto.size >= sizeListId && sizeListId != 0) {
             leagueList.clear()
             setAdapter(leagueAddto)
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity() {
         }, 2000)
     }
 
-    fun disableProgress() {
+    private fun disableProgress() {
         if (swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }

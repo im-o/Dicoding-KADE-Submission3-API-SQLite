@@ -9,12 +9,12 @@ import com.stimednp.kadesubmission3.model.Favorites.Companion.INT_SCOREH
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_BADGEA
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_BADGEH
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_DATEEV
-import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_TIMEEV
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_EVENT
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_LEAGUE
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_SPORT
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_TEAMA
 import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_TEAMH
+import com.stimednp.kadesubmission3.model.Favorites.Companion.STR_TIMEEV
 import com.stimednp.kadesubmission3.model.Favorites.Companion.TABLE_FAVORITE
 import org.jetbrains.anko.db.*
 
@@ -74,7 +74,7 @@ object MydbOpenHelper {
         get() = MydbOpenHelperNext.getInstance(applicationContext)
 
     //create table
-    fun createTable(db: SQLiteDatabase){
+    private fun createTable(db: SQLiteDatabase) {
         db.createTable(
             TABLE_FAVORITE, true,
             ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
