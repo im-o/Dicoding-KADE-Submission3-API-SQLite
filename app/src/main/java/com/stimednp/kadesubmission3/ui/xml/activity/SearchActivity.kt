@@ -48,7 +48,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     toast(getString(R.string.nomore_data))
                     disabelProgress()
                 } else {
-                    searchEvent(textSearch!!)
+                    searchEvent(textSearch ?: "")
                 }
             } else {
                 toast(getString(R.string.str_search))
@@ -112,7 +112,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             try {
                 val responseE = listEvents.await()
                 val resBodyE = responseE.body()
-                savetoArrays(resBodyE?.event!!)
+                savetoArrays(resBodyE?.event)
             } catch (er: Exception) {
                 e("INIII", "ERRROR SEARCH 1 $er")
                 runOnUiThread {

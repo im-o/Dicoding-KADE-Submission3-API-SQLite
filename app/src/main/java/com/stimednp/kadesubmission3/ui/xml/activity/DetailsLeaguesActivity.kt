@@ -21,8 +21,7 @@ import org.jetbrains.anko.toast
 
 class DetailsLeaguesActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
-
-        val EXTRA_DATA: String = "extra_data"
+        const val EXTRA_DATA: String = "extra_data"
         var items: Leagues? = null
     }
 

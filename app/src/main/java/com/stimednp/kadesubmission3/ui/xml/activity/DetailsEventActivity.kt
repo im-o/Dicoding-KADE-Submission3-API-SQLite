@@ -32,16 +32,16 @@ import org.jetbrains.anko.toast
 
 class DetailsEventActivity : AppCompatActivity() {
     companion object {
-        val EXTRA_DATA_EVENT: String = "extra_data_event"
-        val EXTRA_BADGEH: String = "extra_badge_h"
-        val EXTRA_BADGEA: String = "extra_badge_A"
+        const val EXTRA_DATA_EVENT: String = "extra_data_event"
+        const val EXTRA_BADGEH: String = "extra_badge_h"
+        const val EXTRA_BADGEA: String = "extra_badge_A"
     }
 
     private val nameSavePref = "my_savepref_fav"
-    private var keyIdSavePref: String? = null
+    private var keyIdSavePref = "my_key_default"
     private var menuItem: Menu? = null
 
-    private var eventsL: EventsLeagues? = null
+    private lateinit var eventsL: EventsLeagues
     private var badgeTeamH: String? = null
     private var badgeTeamA: String? = null
 
@@ -51,7 +51,7 @@ class DetailsEventActivity : AppCompatActivity() {
         val eventId: String? = intent.getStringExtra(EXTRA_DATA_EVENT)
         badgeTeamH = intent.getStringExtra(EXTRA_BADGEH)
         badgeTeamA = intent.getStringExtra(EXTRA_BADGEA)
-        keyIdSavePref = eventId
+        keyIdSavePref = eventId.toString()
 
         setToolbar()
         getDetail(eventId)
@@ -83,18 +83,17 @@ class DetailsEventActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.option_addfav, menu)
         menuItem = menu
-        changeIconFavorite(keyIdSavePref!!)
+        changeIconFavorite(keyIdSavePref)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add_tofav -> {
-                eventsL ?: toast("Data kosong")
-                checkMyPref(eventsL?.idEvent!!)
+                checkMyPref(eventsL.idEvent.toString())
             }
         }
         return super.onOptionsItemSelected(item)
@@ -153,7 +152,7 @@ class DetailsEventActivity : AppCompatActivity() {
     }
 
     private fun removeFavoriteLast(listItem: EventsLeagues) {
-        val id: String = listItem.idEvent!!
+        val id: String = listItem.idEvent.toString()
         try {
             databaseLast.use {
                 delete(
@@ -170,7 +169,7 @@ class DetailsEventActivity : AppCompatActivity() {
     }
 
     private fun removeFavoriteNext(listItem: EventsLeagues) {
-        val id: String = listItem.idEvent!!
+        val id: String = listItem.idEvent.toString()
         try {
             databaseNext.use {
                 delete(
@@ -192,18 +191,18 @@ class DetailsEventActivity : AppCompatActivity() {
         if (isFavorite) { //delete data
             setPrefById(idEvent, false)
             changeIconFavorite(idEvent)
-            if (eventsL?.intHomeScore != null && eventsL?.intAwayScore != null) {
-                removeFavoriteLast(eventsL!!)
+            if (eventsL.intHomeScore != null && eventsL.intAwayScore != null) {
+                removeFavoriteLast(eventsL)
             } else {
-                removeFavoriteNext(eventsL!!)
+                removeFavoriteNext(eventsL)
             }
         } else { //insert data
             setPrefById(idEvent, true)
             changeIconFavorite(idEvent)
-            if (eventsL?.intHomeScore != null && eventsL?.intAwayScore != null) {
-                addtoFavoriteLast(eventsL!!, badgeTeamH!!, badgeTeamA!!)
+            if (eventsL.intHomeScore != null && eventsL.intAwayScore != null) {
+                addtoFavoriteLast(eventsL, badgeTeamH.toString(), badgeTeamA.toString())
             } else {
-                addtoFavoriteNext(eventsL!!, badgeTeamH!!, badgeTeamA!!)
+                addtoFavoriteNext(eventsL, badgeTeamH.toString(), badgeTeamA.toString())
             }
         }
     }
@@ -234,7 +233,7 @@ class DetailsEventActivity : AppCompatActivity() {
 
         val urlimgH = "$badgeTeamH/preview"
         val urlimgA = "$badgeTeamA/preview"
-        val dateChange = CustomesUI.changeDateFormat(ev.dateEvent!!, ev.strTime!!)
+        val dateChange = CustomesUI.changeDateFormat(ev.dateEvent.toString(), ev.strTime.toString())
 
         //header
         ev.intHomeScore ?: ev.intAwayScore ?: tv_fts.invisible()

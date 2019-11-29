@@ -32,7 +32,7 @@ object ApiClient {
         .addInterceptor(interceptor)
         .build()
 
-    fun retrofit(): Retrofit = Retrofit.Builder()
+    private fun retrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
         .client(tsdbClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
